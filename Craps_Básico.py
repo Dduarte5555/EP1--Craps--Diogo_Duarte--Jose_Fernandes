@@ -10,4 +10,4 @@ print(dados)
 
 #perguntas
 pergunta_opção =  input("Qual opção deseja apostar?:  ")
-pergunta_aposta = input("Quantas fichas deseja apostar?:  ")
+pergunta_aposta = int(input("Quantas fichas deseja apostar?:  "))
