@@ -7,6 +7,11 @@ dado1 = random.randint(1, 6)
 dado2 = random.randint(1, 6)
 soma = dado1+dado2
 
+
+dado5 = random.randint(1, 6)
+dado6 = random.randint(1, 6)
+nova_soma = dado5 + dado6
+
 #perguntas
 #pergunta_opção =  input('Qual opção deseja apostar?:  ')
 #aposta = int(input('Quantas fichas deseja apostar?:  '))
@@ -19,6 +24,8 @@ soma = dado1+dado2
 #Na fase point o objetivo do jogador é que saia o mesmo valor da fase Come Out
 #Se esse valor sair ele ganha o dobro do apostado, se sair a soma 7 ele perde tudo
 #Caso saia qualquer outro valor o jogo continua em Point até sair 7 ou o objetivo do jogador
+
+lista_point = [4, 5, 6, 8, 9, 10]
 def pass_line_bet1(soma, fichas, aposta1):
     if soma == 7 or 11:
         fichas = fichas+((aposta1)*2)
@@ -27,6 +34,19 @@ def pass_line_bet1(soma, fichas, aposta1):
     elif soma == 4 or 5 or 6 or 8 or 9 or 10: 
         print('VOCÊ ESTÁ EM POINT')
     return (fichas)
+
+def pass_line_bet2(fichas, aposta1):
+    contador = True
+    while contador:
+        dado3 = random.randint(1, 6)
+        dado4 = random.randint(1, 6)
+        soma_plb_point = dado3 + dado4
+        if soma_plb_point == 7:
+            fichas = fichas
+        elif soma_plb_point == soma:
+            fichas = fichas + ((aposta1)*2)
+        else:
+            continue
 
 
 '''Regra Field'''
@@ -71,12 +91,12 @@ while jogo:
     if fichas<=0:
         jogo = False
     else: 
-        apostarousair = input('Você deseja apostar ou sair? (apostar/sair)')
-        if apostarousair=='sair':
+        apostar_ou_sair = input('Você deseja apostar ou sair? (apostar/sair)')
+        if apostar_ou_sair=='sair':
             jogo = False
-        else:
-            print(fichas)
+        elif apostar_ou_sair == 'apostar':
             print('VOCÊ ESTÁ EM COME OUT')
+            print(fichas)
             modo_de_aposta2 =  input('Você deseja apostar em Field? (sim/não)  ')
             if modo_de_aposta2=='sim':
                 aposta2 = int(input('Quantas fichas deseja apostar?:  '))
@@ -103,6 +123,30 @@ while jogo:
                 aposta1 = int(input('Quantas fichas deseja apostar?:  '))
                 fichas = fichas - aposta1
                 pass_line_bet1(soma, fichas, aposta1)
+                if soma in lista_point:
+                    print(fichas)
+                    pass_line_bet2(fichas, aposta1)
+                    modo_de_aposta2 =  input('Você deseja apostar em Field? (sim/não)  ')
+                    if modo_de_aposta2=='sim':
+                        aposta2 = int(input('Quantas fichas deseja apostar?:  '))
+                        fichas = fichas - aposta2
+                        field(nova_soma, fichas, aposta2)
+                    elif modo_de_aposta2=='não': 
+                        pass
+                    modo_de_aposta3 =  input('Você deseja apostar em Any Craps? (sim/não)  ')
+                    if modo_de_aposta3=='sim':
+                        aposta3 = int(input('Quantas fichas deseja apostar?:  '))
+                        fichas = fichas - aposta3
+                        any_craps(nova_soma, fichas, aposta3)
+                    elif modo_de_aposta3=='não': 
+                        pass
+                    modo_de_aposta4 =  input('Você deseja apostar em Twelve? (sim/não)  ')
+                    if modo_de_aposta4=='sim':
+                        aposta4 = int(input('Quantas fichas deseja apostar?:  '))
+                        fichas = fichas - aposta4
+                        any_craps(nova_soma, fichas, aposta4)
+                    elif modo_de_aposta4=='não': 
+                        pass                                
             elif modo_de_aposta1=='não': 
                 pass
             
