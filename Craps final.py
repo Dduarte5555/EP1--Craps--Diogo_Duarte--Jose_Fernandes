@@ -6,11 +6,13 @@ fichas = 1000
 dado1 = random.randint(1, 6)
 dado2 = random.randint(1, 6)
 soma = dado1+dado2
-
+print (soma)
 
 dado5 = random.randint(1, 6)
 dado6 = random.randint(1, 6)
 nova_soma = dado5 + dado6
+
+print (nova_soma)
 
 #perguntas
 #pergunta_opção =  input('Qual opção deseja apostar?:  ')
@@ -29,9 +31,9 @@ lista_point = [4, 5, 6, 8, 9, 10]
 def pass_line_bet1(soma, fichas, aposta1):
     if soma == 7 or 11:
         fichas = fichas+((aposta1)*2)
-    elif soma == 2 or 3 or 12:
+    if soma == 2 or 3 or 12:
         fichas = fichas
-    elif soma == 4 or 5 or 6 or 8 or 9 or 10: 
+    if soma == 4 or 5 or 6 or 8 or 9 or 10: 
         print('VOCÊ ESTÁ EM POINT')
     return (fichas)
 
@@ -43,8 +45,10 @@ def pass_line_bet2(fichas, aposta1):
         soma_plb_point = dado3 + dado4
         if soma_plb_point == 7:
             fichas = fichas
-        elif soma_plb_point == soma:
+            contador = False
+        if soma_plb_point == soma:
             fichas = fichas + ((aposta1)*2)
+            contador = False
         else:
             continue
 
@@ -58,12 +62,14 @@ def pass_line_bet2(fichas, aposta1):
 def field(soma, fichas, aposta2):
     if soma == 5 or 6 or 7 or 8:
         fichas = fichas
-    elif soma == 3 or 4 or 9 or 10 or 11:
+    if soma == 3 or 4 or 9 or 10 or 11:
         fichas = fichas + ((aposta2)*2)
-    elif soma == 2:
+    if soma == 2:
         fichas = fichas + ((aposta2)*3)
-    elif soma == 12:
+    if soma == 12:
         fichas = fichas + ((aposta2)*4)
+    else:
+        pass
     return(fichas)
 
 '''Regra Any Craps'''
@@ -71,9 +77,9 @@ def field(soma, fichas, aposta2):
 #Se a soma dos dados derem 2, 3 ou 12 o jogador ganha 7 vezes o valor apostado
 def any_craps(soma, fichas, aposta3):
     if soma == 2  or 3 or 12:
-        fichas = fichas + (aposta3)*7
+        fichas = fichas + (aposta3)*8
     else:
-        fichas = fichas - aposta3
+        fichas = fichas
     return (fichas)
 
 '''Regra Twelve'''
@@ -81,10 +87,11 @@ def any_craps(soma, fichas, aposta3):
 #Nesta aposta se a soma dos dados derem 12 o jogador ganha trinta vezes o que apostou, senão perde a aposta.
 def twelve(soma, fichas, aposta4):
     if soma == 12:
-        fichas == fichas+((aposta4)*3)
+        fichas = fichas+((aposta4)*3)
     else:
-        fichas == fichas - aposta4
+        fichas = fichas
     return (fichas)
+
 
 jogo = True
 while jogo:
@@ -95,7 +102,7 @@ while jogo:
         apostar_ou_sair = input('Você deseja apostar ou sair? (apostar/sair)')
         if apostar_ou_sair=='sair':
             jogo = False
-        elif apostar_ou_sair == 'apostar':
+        if apostar_ou_sair == 'apostar':
             print('VOCÊ ESTÁ EM COME OUT')
             print(fichas)
             modo_de_aposta2 =  input('Você deseja apostar em Field? (sim/não)  ')
@@ -104,7 +111,7 @@ while jogo:
                 fichas = fichas - aposta2
                 field(soma, fichas, aposta2)
                 print(fichas)
-            elif modo_de_aposta2=='não': 
+            if modo_de_aposta2=='não': 
                 pass
             modo_de_aposta3 =  input('Você deseja apostar em Any Craps? (sim/não)  ')
             if modo_de_aposta3=='sim':
@@ -112,7 +119,7 @@ while jogo:
                     fichas = fichas - aposta3
                     any_craps(soma, fichas, aposta3)
                     print(fichas)
-            elif modo_de_aposta3=='não': 
+            if modo_de_aposta3=='não': 
                 pass
             modo_de_aposta4 =  input('Você deseja apostar em Twelve? (sim/não)  ')
             if modo_de_aposta4=='sim':
@@ -120,7 +127,7 @@ while jogo:
                     fichas = fichas - aposta4
                     any_craps(soma, fichas, aposta4)
                     print(fichas)
-            elif modo_de_aposta4=='não': 
+            if modo_de_aposta4=='não': 
                 pass             
             modo_de_aposta1 =  input('Você deseja apostar em Pass Line Bat? (sim/não)  ')
             if modo_de_aposta1=='sim':
@@ -137,7 +144,7 @@ while jogo:
                         fichas = fichas - aposta2
                         field(nova_soma, fichas, aposta2)
                         print(fichas)
-                    elif modo_de_aposta2=='não': 
+                    if modo_de_aposta2=='não': 
                         pass
                     modo_de_aposta3 =  input('Você deseja apostar em Any Craps? (sim/não)  ')
                     if modo_de_aposta3=='sim':
@@ -145,7 +152,7 @@ while jogo:
                         fichas = fichas - aposta3
                         any_craps(nova_soma, fichas, aposta3)
                         print(fichas)
-                    elif modo_de_aposta3=='não': 
+                    if modo_de_aposta3=='não': 
                         pass
                     modo_de_aposta4 =  input('Você deseja apostar em Twelve? (sim/não)  ')
                     if modo_de_aposta4=='sim':
@@ -153,10 +160,8 @@ while jogo:
                         fichas = fichas - aposta4
                         any_craps(nova_soma, fichas, aposta4)
                         print(fichas)
-                    elif modo_de_aposta4=='não': 
+                    if modo_de_aposta4=='não': 
                         pass                                
-            elif modo_de_aposta1=='não': 
+            if modo_de_aposta1=='não': 
                 pass
-            
-
 print('Você terminou o jogo com {} fichas.'.format(fichas))
